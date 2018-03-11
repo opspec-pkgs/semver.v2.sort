@@ -9,14 +9,9 @@ outputs:
     array:
       description: sorted semantic versions
 run:
-  serial:
-    - container:
-        image: { ref: 'opspecpkgs/semver.v2.sort:1.0.0' }
-        cmd: [node, /cmd.js]
-        files:
-          /semVers.json: $(semVers)
-          /cmd.js:
-
-    - container:
-        image: { ref: alpine }
-        cmd: [ echo, $(semVers)]
+  container:
+    image: { ref: 'opspecpkgs/semver.v2.sort:1.0.0' }
+    cmd: [node, /cmd.js]
+    files:
+      /semVers.json: $(semVers)
+      /cmd.js:
