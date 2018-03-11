@@ -1,0 +1,22 @@
+name: github.com/opspec-pkgs/semver.v2.sort
+version: 1.0.0
+inputs:
+  semVers:
+    array:
+      description: unsorted semantic versions
+outputs:
+  semVers:
+    array:
+      description: sorted semantic versions
+run:
+  serial:
+    - container:
+        image: { ref: 'opspecpkgs/semver.v2.sort:1.0.0' }
+        cmd: [node, /cmd.js]
+        files:
+          /semVers.json: $(semVers)
+          /cmd.js:
+
+    - container:
+        image: { ref: alpine }
+        cmd: [ echo, $(semVers)]
